@@ -6,3 +6,4 @@
 - [Tim-Bits Project](project_timbits.md) — Standalone HTML archive of weekly HPE Networking Tim·bit sales emails; Dennis adds one entry per week
 - [Update memory at session end](feedback_session_end.md) — Always write new learnings to memory files when Dennis wraps up a session
 - [Always git pull at session start](feedback_git_pull.md) — Pull before any edits; Jeff Dziedzic is a co-collaborator who may have pushed changes
+- [Release notes email format](feedback_release_notes.md) — Short, plain English; close by directing users to the Feedback button in the app (not reply to email)

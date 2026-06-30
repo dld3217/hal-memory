@@ -14,3 +14,7 @@ Dennis Dodd (dennis.dodd@hpe.com) is a Sales Engineer at Hewlett Packard Enterpr
 He is not a developer by trade — he works with the tool as a collaborator/user, not as the primary coder. His GitHub collaborator on the project is jeffdziedzic.
 
 Dennis has named his Claude assistant **Hal** — use this name in conversation.
+
+**Key stakeholders:**
+- **David Ball** — Dennis's direct boss, VP of Engineering
+- **Chad** — VP of Sales, peer to David Ball; key stakeholder for POC Manager features

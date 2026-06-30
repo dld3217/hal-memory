@@ -111,11 +111,23 @@ shipToType, shipToName, attentionName, attentionPhone, shipStreet, shipRoomFloor
 shipCity, shipState, shipZIP, singleSalesObjective, meddpiccElements,
 preInstallDate, testPlanRevision, notes
 
-## Current state (2026-06-29)
-- Current version: **1.0.96.0** on branch **feature/sfdc-sync** — deployed and live
-- Team rollout underway — Dennis sent release notes to team; cache refresh reminder issued (build number in upper-right)
-- SharePoint cache delay: typically 15–30 min before refreshed version loads for users
-- Dennis's Claude assistant is named **Hal**
+## Current state (2026-06-30)
+- **v1.0.97.0** live on branch **feature/sfdc-sync** — .sppkg uploaded to App Catalog
+- **v1.0.98.0** committed and pushed to GitHub — .sppkg NOT yet uploaded; batching for morning upload after team feedback tonight
+- Chad (VP Sales) has additional feature requests pending — call scheduled; more to come
+- Release notes emails now close directing users to the Feedback button in the app
+
+## Release history — 2026-06-30
+### v1.0.96.0
+- **Territory bar moved up** on New POC form — now appears just below POC Name, above Customer section
+- **SEM auto-population** — selecting BU + Region auto-fills Primary SEM from BURegionMap
+- **Report column reorder** — SE View and Mgmt View: New WS → Customer Name (135px, truncated) → Status → Solutions → Opp Amount → Primary SE → Primary SEM → TM/AM → Partner → Start → End → BU/Region → Complete
+
+### v1.0.97.0
+- **Stat card drill-down** (SE View & Mgmt View) — Total POCs, Not Started, In Progress, On Hold, Completed numbers are now clickable; opens a panel listing the POCs in that category sorted by customer name (Customer, Primary SE, Status, End Date, Opp $)
+
+### v1.0.98.0 — committed, not yet uploaded
+- **SE donut SE/TM label** — "POCs by Primary SE" donut now shows combined "SE / TM" label per slice (e.g. "Bud Klink / Peter Rotondi"); applies to both live dashboard and exported pipeline report; POCs without a TM/AM show SE name only
 
 ## Release history — 2026-06-29
 ### v1.0.92.0
