@@ -78,7 +78,7 @@ Space-separated search terms — include partner names, product names, acronyms,
 List name: `TimBits` on EnterpriseSalesTeamHome
 Columns: Title, TBDate, WeekOf, Body, Link, Format, Categories, Keywords, Published
 
-### App Catalog — BLOCKED on IT helpdesk ticket (submitted 2026-06-29)
+### App Catalog — COMPLETED (IT provisioned 2026-06-30)
 - Creating a Site Collection App Catalog on EnterpriseSalesTeamHome requires SharePoint tenant admin rights
 - Dan (americasbaumdani@hpe.com) is site owner/admin for EnterpriseSalesTeamHome but does NOT have tenant admin rights
 - Jeff Dziedzic also does not have those rights — the original POC Manager App Catalog was set up by an IT admin

@@ -112,7 +112,7 @@ shipCity, shipState, shipZIP, singleSalesObjective, meddpiccElements,
 preInstallDate, testPlanRevision, notes
 
 ## Current state (2026-06-29)
-- Current version: **1.0.95.0** on branch **feature/sfdc-sync** — deployed and live
+- Current version: **1.0.96.0** on branch **feature/sfdc-sync** — deployed and live
 - Team rollout underway — Dennis sent release notes to team; cache refresh reminder issued (build number in upper-right)
 - SharePoint cache delay: typically 15–30 min before refreshed version loads for users
 - Dennis's Claude assistant is named **Hal**
@@ -139,8 +139,23 @@ preInstallDate, testPlanRevision, notes
 - Admin Import Legacy POCs tab removed
 - Admin Restore from POC-Data tab removed
 
+## Stale POC Alerts PA flow — IN PROGRESS (2026-06-30)
+- Flow name: "HPEN POC Manager — Stale POC Alerts"
+- **To:** OwnerEmail (SE), **CC:** SEMPrimary (SEM — now stores email from auto-population)
+- One email per stale POC (not a digest)
+- **Built so far (stopped mid-build for Dennis's 1:1):**
+  1. ✅ Recurrence trigger (daily)
+  2. ✅ Get items — AppConfig, filter `Title eq 'StaleAlertEnabled'`, Top 1
+  3. ✅ Condition — `first(body('Get_items')?['value'])?['Value']` equals `true`
+  4. ✅ Yes branch: Get items 2 — AppConfig, filter `Title eq 'StaleAlertDays'`, Top 1
+  5. ✅ Compose — **Threshold Date** — `addDays(utcNow(), mul(-1, int(first(body('Get_items_2')?['value'])?['Value'])))`
+  6. ✅ Get items 3 — POCs list, filter: `Status ne 'Completed' and Status ne 'Deferred' and Status ne 'Not Applicable' and Modified lt '@{outputs('Threshold_Date')}'`, Top 500
+  7. ⬜ Apply to each — loop over Get items 3 value (stale POCs)
+  8. ⬜ Send email — To: OwnerEmail, CC: SEMPrimary, HPE navy header with POC details
+- **Next step when resuming:** Add Apply to each → select `value` from Get items 3 → then add Send an email V2 inside the loop
+
 ## Pending / future work
-- **Stale POC Alerts PA flow** — PA flow not yet built; reads StaleAlertEnabled + StaleAlertDays from AppConfig; emails region manager (To) + SE (CC) — Dennis targeting tonight (2026-06-29)
+- **Stale POC Alerts PA flow** — IN PROGRESS — see section above
 - **POC Name blank in email** — SP Title field empty for test POCs; data issue, not code; will resolve as SEs enter real data
 - **PDL setup** — Dennis creating HPE PDL for admin notifications; add to Feedback Settings in Admin; share both PA flows with PDL
 - End-to-end test with real POC data before team rollout
@@ -219,7 +234,7 @@ preInstallDate, testPlanRevision, notes
 - **Fix needed:** Salesforce admin must provide either:
   1. A service/integration account with org-wide read access to Opportunities, or
   2. Grant Dennis's account (dennis.dodd@hpe.com) org-wide read visibility to Opportunity records
-- **Status:** Dennis drafting email to Salesforce admin (2026-06-29) — admin identity TBD (ask TM/AM or Jeff)
+- **Status:** Request submitted to SFDC team (2026-06-30) — awaiting response
 - **Once fixed:** Re-authenticate the Salesforce connector in the PA flow under the broader account (~5 min fix)
 - Flow connector update: Edit flow → find Salesforce action → click connection → Add new connection → sign in with service account
 
