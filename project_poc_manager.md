@@ -139,23 +139,18 @@ preInstallDate, testPlanRevision, notes
 - Admin Import Legacy POCs tab removed
 - Admin Restore from POC-Data tab removed
 
-## Stale POC Alerts PA flow — IN PROGRESS (2026-06-30)
+## Stale POC Alerts PA flow — COMPLETED 2026-06-30
 - Flow name: "HPEN POC Manager — Stale POC Alerts"
-- **To:** OwnerEmail (SE), **CC:** SEMPrimary (SEM — now stores email from auto-population)
+- **To:** OwnerEmail (SE), **CC:** SEMPrimary (SEM) — CC uses `if(contains(SEMPrimary,'@'), SEMPrimary, '')` to handle old POCs with names instead of emails
 - One email per stale POC (not a digest)
-- **Built so far (stopped mid-build for Dennis's 1:1):**
-  1. ✅ Recurrence trigger (daily)
-  2. ✅ Get items — AppConfig, filter `Title eq 'StaleAlertEnabled'`, Top 1
-  3. ✅ Condition — `first(body('Get_items')?['value'])?['Value']` equals `true`
-  4. ✅ Yes branch: Get items 2 — AppConfig, filter `Title eq 'StaleAlertDays'`, Top 1
-  5. ✅ Compose — **Threshold Date** — `addDays(utcNow(), mul(-1, int(first(body('Get_items_2')?['value'])?['Value'])))`
-  6. ✅ Get items 3 — POCs list, filter: `Status ne 'Completed' and Status ne 'Deferred' and Status ne 'Not Applicable' and Modified lt '@{outputs('Threshold_Date')}'`, Top 500
-  7. ⬜ Apply to each — loop over Get items 3 value (stale POCs)
-  8. ⬜ Send email — To: OwnerEmail, CC: SEMPrimary, HPE navy header with POC details
-- **Next step when resuming:** Add Apply to each → select `value` from Get items 3 → then add Send an email V2 inside the loop
+- Recurrence (daily) → Get StaleAlertEnabled → Condition (true) → Get StaleAlertDays → Threshold Date Compose → Get POCs (filtered) → Apply to each → Send email
+- Filter on POCs: `Status ne 'Completed' and Status ne 'Deferred' and Status ne 'Not Applicable' and Modified lt '@{outputs('Threshold_Date')}' and Title ne ''`
+- Condition gotcha: right side must use Expression `'true'` (string) not boolean true
+- Tested successfully — email sent to bud.klink@hpe.com for stale Willis Knighton POC
+- Waiting on real stale POCs to fire naturally (editing POCs refreshes Modified timestamp, un-staling them)
+- StaleAlertDays currently set to 7 in Admin → Scheduled Reports
 
 ## Pending / future work
-- **Stale POC Alerts PA flow** — IN PROGRESS — see section above
 - **POC Name blank in email** — SP Title field empty for test POCs; data issue, not code; will resolve as SEs enter real data
 - **PDL setup** — Dennis creating HPE PDL for admin notifications; add to Feedback Settings in Admin; share both PA flows with PDL
 - End-to-end test with real POC data before team rollout
