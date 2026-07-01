@@ -111,11 +111,21 @@ shipToType, shipToName, attentionName, attentionPhone, shipStreet, shipRoomFloor
 shipCity, shipState, shipZIP, singleSalesObjective, meddpiccElements,
 preInstallDate, testPlanRevision, notes
 
-## Current state (2026-06-30)
-- **v1.0.97.0** live on branch **feature/sfdc-sync** — .sppkg uploaded to App Catalog
-- **v1.0.98.0** committed and pushed to GitHub — .sppkg NOT yet uploaded; batching for morning upload after team feedback tonight
-- Chad (VP Sales) has additional feature requests pending — call scheduled; more to come
-- Release notes emails now close directing users to the Feedback button in the app
+## Current state (2026-07-01)
+- **v1.0.98.0** live — uploaded to App Catalog
+- **v1.0.99.0** in progress (not yet deployed) — batching with FY filter changes before next deploy
+- Waiting on team feedback re: Completed POC display / FY filter options (email sent to team this morning)
+- Chad's remaining feature requests TBD — call pending
+
+## Staged for next batch deploy (v1.0.99.0)
+- **Feedback response system** (Admin → Feedback tab):
+  - New statuses: Under Review, Needs Clarification, Rejected, Resolved (replaced "In Review")
+  - Admin can type a response + select status → Send Response button writes both to SP
+  - Previous admin response displayed on the item card (green callout box)
+  - SP list: FeedbackStatus choices manually updated; AdminResponse (multi-line text) column manually added
+  - PA flow built: "HPEN POC Manager — Feedback Response Notification" — triggers on Feedback item modified, sends email to SubmittedByEmail when AdminResponse is not blank
+  - **Test after deploy:** manually update a Feedback item in SP, confirm email fires to submitter
+- **FY filter changes** — pending team feedback; will add to this batch once feedback received
 
 ## Release history — 2026-06-30
 ### v1.0.96.0
