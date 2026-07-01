@@ -7,3 +7,4 @@
 - [Update memory at session end](feedback_session_end.md) — Always write new learnings to memory files when Dennis wraps up a session
 - [Always git pull at session start](feedback_git_pull.md) — Pull before any edits; Jeff Dziedzic is a co-collaborator who may have pushed changes
 - [Release notes email format](feedback_release_notes.md) — Short, plain English; close by directing users to the Feedback button in the app (not reply to email)
+- [Daily deploy cadence](feedback_deploy_cadence.md) — Commit throughout day, single evening deploy + team email; don't prompt to deploy after every change
